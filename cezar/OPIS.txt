@@ -1,0 +1,8 @@
+INFORMACJA:
+W programie NIE DZIAŁAJĄ opcje:
+-j - kryptoanaliza oparta o tekst pomocniczy i kryptogram (szyfr afiniczny)
+-k - kryptoanaliza oparta o kryptogram (szyfr afiniczny)
+
+Program uruchamiamy w Visual Studio 2019.
+Pliki: plain.txt key.txt znajdują się w:
+\bin\Debug\netcoreapp3.1 

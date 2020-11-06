@@ -1,0 +1,13 @@
+C:\Users\Darek\source\Training\cezar\bin\Debug\netcoreapp3.1\cezar.exe
+C:\Users\Darek\source\Training\cezar\bin\Debug\netcoreapp3.1\cezar.deps.json
+C:\Users\Darek\source\Training\cezar\bin\Debug\netcoreapp3.1\cezar.runtimeconfig.json
+C:\Users\Darek\source\Training\cezar\bin\Debug\netcoreapp3.1\cezar.runtimeconfig.dev.json
+C:\Users\Darek\source\Training\cezar\bin\Debug\netcoreapp3.1\cezar.dll
+C:\Users\Darek\source\Training\cezar\bin\Debug\netcoreapp3.1\cezar.pdb
+C:\Users\Darek\source\Training\cezar\obj\Debug\netcoreapp3.1\cezar.csprojAssemblyReference.cache
+C:\Users\Darek\source\Training\cezar\obj\Debug\netcoreapp3.1\cezar.AssemblyInfoInputs.cache
+C:\Users\Darek\source\Training\cezar\obj\Debug\netcoreapp3.1\cezar.AssemblyInfo.cs
+C:\Users\Darek\source\Training\cezar\obj\Debug\netcoreapp3.1\cezar.csproj.CoreCompileInputs.cache
+C:\Users\Darek\source\Training\cezar\obj\Debug\netcoreapp3.1\cezar.dll
+C:\Users\Darek\source\Training\cezar\obj\Debug\netcoreapp3.1\cezar.pdb
+C:\Users\Darek\source\Training\cezar\obj\Debug\netcoreapp3.1\cezar.genruntimeconfig.cache
