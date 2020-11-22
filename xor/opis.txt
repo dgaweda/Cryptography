@@ -1,0 +1,1 @@
+Kryptoanaliza działa w przypadku klucza o długości 32.
