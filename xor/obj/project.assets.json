@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Darek\\source\\Kryptografia\\vigenere\\vigenere.csproj",
-      "projectName": "vigenere",
-      "projectPath": "C:\\Users\\Darek\\source\\Kryptografia\\vigenere\\vigenere.csproj",
+      "projectUniqueName": "C:\\Users\\Darek\\source\\Kryptografia\\xor\\xor.csproj",
+      "projectName": "xor",
+      "projectPath": "C:\\Users\\Darek\\source\\Kryptografia\\xor\\xor.csproj",
       "packagesPath": "C:\\Users\\Darek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Darek\\source\\Kryptografia\\vigenere\\obj\\",
+      "outputPath": "C:\\Users\\Darek\\source\\Kryptografia\\xor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Darek\\AppData\\Roaming\\NuGet\\NuGet.Config",

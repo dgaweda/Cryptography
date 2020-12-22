@@ -1,0 +1,13 @@
+C:\Users\Darek\source\Kryptografia\xor\bin\Debug\netcoreapp3.1\xor.exe
+C:\Users\Darek\source\Kryptografia\xor\bin\Debug\netcoreapp3.1\xor.deps.json
+C:\Users\Darek\source\Kryptografia\xor\bin\Debug\netcoreapp3.1\xor.runtimeconfig.json
+C:\Users\Darek\source\Kryptografia\xor\bin\Debug\netcoreapp3.1\xor.runtimeconfig.dev.json
+C:\Users\Darek\source\Kryptografia\xor\bin\Debug\netcoreapp3.1\xor.dll
+C:\Users\Darek\source\Kryptografia\xor\bin\Debug\netcoreapp3.1\xor.pdb
+C:\Users\Darek\source\Kryptografia\xor\obj\Debug\netcoreapp3.1\xor.csprojAssemblyReference.cache
+C:\Users\Darek\source\Kryptografia\xor\obj\Debug\netcoreapp3.1\xor.AssemblyInfoInputs.cache
+C:\Users\Darek\source\Kryptografia\xor\obj\Debug\netcoreapp3.1\xor.AssemblyInfo.cs
+C:\Users\Darek\source\Kryptografia\xor\obj\Debug\netcoreapp3.1\xor.csproj.CoreCompileInputs.cache
+C:\Users\Darek\source\Kryptografia\xor\obj\Debug\netcoreapp3.1\xor.dll
+C:\Users\Darek\source\Kryptografia\xor\obj\Debug\netcoreapp3.1\xor.pdb
+C:\Users\Darek\source\Kryptografia\xor\obj\Debug\netcoreapp3.1\xor.genruntimeconfig.cache

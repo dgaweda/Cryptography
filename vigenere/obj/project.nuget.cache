@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2HKfS5fCWqTp/2IjUWKWmXrysJHXaVCPB5q8Z6KgFd15da/oKKvlSkbwzr/D5glTxucnMHjz9hQZCgulHm8xBQ==",
+  "dgSpecHash": "1/JgERSI1opuUzdF5gyrQh8X+sjMNqkJ+cTX8JJSU+e/+IeL6PRYqJYyw+/JSf0hyGuQBeG2/qCR9ufwS3Gnow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Darek\\source\\repos\\vigenere\\vigenere.csproj",
+  "projectFilePath": "C:\\Users\\Darek\\source\\Kryptografia\\vigenere\\vigenere.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
