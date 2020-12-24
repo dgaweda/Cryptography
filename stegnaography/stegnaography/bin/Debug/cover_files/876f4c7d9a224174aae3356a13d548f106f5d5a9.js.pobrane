@@ -1,0 +1,117 @@
+(function () {
+  if ('Discourse' in window && typeof Discourse._registerPluginCode === 'function') {
+    var __theme_name__ = "Wygląd domyślny";
+    var settings = Discourse.__container__.lookup("service:theme-settings").getObjectForTheme(38);
+    var themePrefix = function themePrefix(key) {
+      return 'theme_translations.38.' + key;
+    };
+
+    Discourse._registerPluginCode('0.8.18', function (api) {
+      try {
+
+        var user = Discourse.User.current();
+        if (user) {
+          Discourse.User.findByUsername(user.username).then(function (u) {
+
+            new Promise(function (resolve, reject) {
+              var s = document.createElement('script');
+              s.async = true;
+              s.src = "https://static.dpcdn.pl/assets/js/md5.min.js"; // URL
+              s.onerror = function (err) {
+                return reject(err);
+              };
+              s.onload = function () {
+                return resolve(s);
+              };
+              document.head.appendChild(s);
+            }).then(function () {
+
+              !function (d, m, e, v, n, t, s) {
+                d['WphTrackObject'] = n;d[n] = window[n] || function () {
+                  (d[n].queue = d[n].queue || []).push(arguments);
+                }, d[n].l = 1 * new Date(), t = m.createElement(e), s = m.getElementsByTagName(e)[0], t.async = 1;t.src = v;s.parentNode.insertBefore(t, s);
+              }(window, document, 'script', 'https://pixel.wp.pl/w/tr.js', 'wph');
+              wph('init', 'WP-K0FKWR0AR3-69U-AC4', { em: md5(u.email), uid: user.external_id, overAll: false });
+            }, function (error) {
+              console.error(error);
+            });
+          });
+        }
+      } catch (err) {
+        var rescue = require("discourse/lib/utilities").rescueThemeError;
+        rescue(__theme_name__, err, api);
+      }
+    });
+  }
+})();
+    (function() {
+      var limit = 100;
+      var targetTagName = "img";
+      var loadingClassName = "cdn-loading";
+      var targetUrlFragment = "//techforum.wpcdn.pl/";
+    
+      var meditate = function meditate(ms) {
+        return new Promise(function(resolve) {
+          return setTimeout(resolve, ms);
+        });
+      };
+    
+      window.addEventListener(
+        "error",
+        async function(e) {
+          if (!e) return;
+          var target = e.target;
+    
+          if (
+            target &&
+            !target.loaded &&
+            target.nodeName &&
+            !target.classList.contains('d-lazyload') &&
+            target.nodeName.toLowerCase() == targetTagName &&
+            target.src &&
+            target.src.includes(targetUrlFragment)
+          ) {
+            var imageUrl = target.src;
+            var head = {
+              status: 404
+            };
+            var i = 0;
+            target.crossOrigin = "anonymous";
+            target.classList.add(loadingClassName);
+    
+            do {
+              if (i > 0) await meditate(500);
+              head = await fetch(imageUrl, {
+                method: "HEAD",
+                headers: {
+                  credentials: "omit"
+                }
+              });
+              i += 1;
+            } while (head.status === 404 && i <= limit);
+    
+            target.loaded = true;
+            target.src = imageUrl;
+            target.classList.remove(loadingClassName);
+          }
+        },
+        true
+      );
+    })();
+
+
+    if (!String.prototype.includes) {
+      String.prototype.includes = function (search, start) {
+        'use strict';
+        if (typeof start !== 'number') {
+          start = 0;
+        }
+        
+        if (start + search.length > this.length) {
+          return false;
+        } else {
+          return this.indexOf(search, start) !== -1;
+        }
+      };
+    }
+

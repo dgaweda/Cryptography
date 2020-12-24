@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	
+<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	
+<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	
+<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	
+<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	
+<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	
+<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0050)https://inf.ug.edu.pl/~amb/krypto-lab/stegano.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Andrzej Borzyszkowski">
+	
+<meta http-equiv="CACHE-CONTROL" content="NO-STORE,NO-CACHE">
+<meta name="ROBOTS" content="NONE">
+	<meta name="keywords" content="Andrzej Borzyszkowski, Uniwersytet,
+	Uniwersytet Gdanski, Gdansk, Uniwersytet Gdański, Gdańsk, Informatyka,
+	Informa, UG, II, Kryptografia, Cryptography, CS, Computer Science">
+<link rel="stylesheet" type="text/css" href="./conver_files/main.css">
+<title>Steganografia i znaki wodne</title>
+</head>
+<body>
+<div class="reverse">
+ Andrzej M. Borzyszkowski<img src="./conver_files/amb-100x100.png" alt="Andrzej M.
+ Borzyszkowski" align="right" height="100" width="100">
+</div>
+<div class="reverse">
+	Steganografia i znaki wodne</div>
+<div class="main">
+Na <a href="https://inf.ug.edu.pl/~amb/krypto/stegano.pdf">wykładzie</a> przedstawiono problematykę ukrywania wiadomości w&nbsp;różnych nośnikach.
+
+<h1>Zadanie:</h1>
+<p>Dane są pliki <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b> z ciągiem bitów zapisanym w układzie szesnastkowym (podobnie jak wyniki funkcji skrótu, jeden z znak z zakresu [0-9,a-e] oznacza 4 bity) oraz <b><span class="" style="font-family: Courier New, Courier, mono;">cover.html</span></b> dużo
+większy jako zawartość jakiejś strony internetowej.
+</p>
+<p>Program <b><span class="" style="font-family: Courier New, Courier, mono;">stegano </span></b>będzie wywoływany z dwiema opcjami. Opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> oznacza zanurzanie wiadomości, opcja <b><span class="" style="font-family: Courier New, Courier, mono;">-d</span></b> jej
+wyodrębnianie. Wiadomość odczytana z pliku <b><span class="" style="font-family: Courier New, Courier, mono;">mess.txt</span></b>. Program wywołany jako zanurzanie zapisze zmieniony odpowiednio nośnik do pliku o nazwie <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b>.
+Program w opcji wyodrębniania będzie odczytywać plik <b><span class="" style="font-family: Courier New, Courier, mono;">watermark.html</span></b> i zapisywać wyodrębnioną wiadomość do pliku <b><span class="" style="font-family: Courier New, Courier, mono;">detect.txt</span></b>.
+Program wywołany z opcją <b><span class="" style="font-family: Courier New, Courier, mono;">-e</span></b> powinien zwracać błąd, gdy nośnik jest za mały do przekazania całej wiadomości.</p>
+<p>Opcje o numerach -1, -2, -3 i -4 będą oznaczać przyjęty algorytm zanurzania wiadomości.</p>
+<ol>
+<li>każdy bit ukrywanej wiadomości będzie przekazywany jako dodatkowa spacja na końcu każdego wiersza, ukrywana wiadomość może mieć najwyżej tyle bitów ile wierszy w nośniku.</li>
+<li>każdy bit ukrywanej wiadomości będzie ukrywany jako pojedyncza lub podwójna spacja. Znaki tabulacji można pozostawić bez zmian. Ukrywana wiadomość może być co najwyżej długości równej liczbie spacji bez powtórzeń w nośniku.</li>
+<li>bity ukrywanej wiadomości będą przekazywane jako fałszywe literówki w nazwach atrybutów. Np. można w każdym znaczniku akapitu bez podanej wysokości czy marginesu dodać te atrybuty: <b><span class="" style="font-family: Courier New, Courier, mono;">&lt;p style="margin-bottom: 0cm; line-height: 100%"&gt;</span></b> i
+wprowadzać błędną nazwę, np. margin-botom lub lineheight. Wówczas wiadomość jest ukrywana w wystąpieniach tych dwóch atrybutów, zero jako błąd w jednym a 1 jako błąd w drugim.
+<!-- Być może w nośniku jest wystarczająco wiele wystąpień tych atrybutów by nie trzeba było ich wprowadzać odrębnie.-->
+</li>
+<li>bity ukrywanej wiadomości będą kodowane jako niepotrzebne sekwencje otwierające i zamykające znaczniki, np. zmiany fontu. W tej opcji program będzie poszukiwał wystąpień znacznika FONT i bit 1 wiadomości spowoduje, że otwarcie znacznika zostanie zastąpione
+sekwencją otwarcie-zamknięcie-otwarcie tego znacznika a bit 0 przeciwnie, po zamknięciu będzie doklejona jeszcze jedna pusta para . Wiadomość ukrywana nie może w tej wersji mieć więcej bitów niż wystąpień tego znacznika w nośniku.</li>
+</ol>We wszystkich przypadkach trzeba pamiętać o usunięciu wszystkich przypadkowych wystąpień sekwencji, które mają kodować wiadomość: spacji na końcach wierszy, podwójnych spacji, nieprawidłowych nazw atrybutów, które właśnie chcemy wprowadzić czy niepotrzebnych
+par otwarcie-zamknięcie znacznika, który używamy do ukrywania wiadomości.
+</div>
+<div class="reverse">
+<!--
+<A HREF="index.html">Plan zajęć</A>-->
+</div>
+
+
+<font face="Courier 10 Pitch"></font> 
+</body></html>

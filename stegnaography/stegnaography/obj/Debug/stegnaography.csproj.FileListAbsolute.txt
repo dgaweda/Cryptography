@@ -1,0 +1,7 @@
+C:\Users\Darek\source\repos\Kryptografia\stegnaography\stegnaography\bin\Debug\stegnaography.exe.config
+C:\Users\Darek\source\repos\Kryptografia\stegnaography\stegnaography\bin\Debug\stegnaography.exe
+C:\Users\Darek\source\repos\Kryptografia\stegnaography\stegnaography\bin\Debug\stegnaography.pdb
+C:\Users\Darek\source\repos\Kryptografia\stegnaography\stegnaography\obj\Debug\stegnaography.csproj.CoreCompileInputs.cache
+C:\Users\Darek\source\repos\Kryptografia\stegnaography\stegnaography\obj\Debug\stegnaography.exe
+C:\Users\Darek\source\repos\Kryptografia\stegnaography\stegnaography\obj\Debug\stegnaography.pdb
+C:\Users\Darek\source\repos\Kryptografia\stegnaography\stegnaography\obj\Debug\stegnaography.csprojAssemblyReference.cache

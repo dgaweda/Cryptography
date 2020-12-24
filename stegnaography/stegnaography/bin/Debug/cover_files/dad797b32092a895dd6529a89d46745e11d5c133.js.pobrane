@@ -1,0 +1,115 @@
+// <![CDATA[
+    var wp_pp_gemius_identifier = '102QcqdLWvSHRiKa9Z29F_VzXmDR_ftvQwRBKAqoVZ3.N7';
+    var wp_pp_gemius_service = 'gapl';
+    var wp_sn = 'dobreprogramy';
+// ]]>
+// <![CDATA[
+window.ctxtconfig = {"debug":false,"theme":"blue","frequency":"optimum","key":"f0a93705455fcf2e663c789cb768fdb92c28f5c9","widget":false,"positive_cls":"ctxt-target-node","negative_cls":"ctxt-skip","ignore_domains":"","features":["modlinks"]};
+(function() {
+    if (document.getElementById('ctxt-script')) {return;}
+    var ctxt = document.createElement('script');
+    ctxt.type = 'text/javascript';
+    ctxt.async = true;
+    ctxt.charset = 'utf-8';
+    ctxt.id = 'ctxt-script';
+    ctxt.src = '//converti.se/convertext.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ctxt, s);
+})();
+// ]]>
+// <![CDATA[
+   (function (w, d, c) {
+        var active = true;
+        var previousState;
+        var init = function (imgUrl, urlLeft, urlRight) {
+            var triggerLayer = d.querySelector('#main > .ember-view');
+            var isSmallScreen = (d.documentElement || d.body).clientWidth <= 1200;
+            var triggerLayerWidth = triggerLayer.clientWidth;
+            previousState = d.body.style.background;
+
+            // return if mobile or bo arguments passed
+            if (isSmallScreen || !imgUrl || !urlLeft || !urlRight || !triggerLayer) return;
+
+            // console.info('[SCREENING] Init');
+
+            var img = 'url(' + imgUrl.trim() + ')';
+
+            // d.body.classList.add('framed-body');
+            d.body.style.background = c + ' ' + img + ' no-repeat fixed 50% 0 / 1920px 1080px';
+
+            triggerLayer.addEventListener('mouseover', function (e) {
+                if (e.target === this) {
+                    this.style.cursor = 'pointer';
+                    // console.info('[SCREENING] Clickable...');
+                } else {
+                    this.style.cursor = 'auto';
+                    // console.info('[SCREENING] Not clickable...');
+                }
+            }, false);
+
+            triggerLayer.addEventListener('mouseout', function (e) {
+                this.style.cursor = 'auto';
+            }, false);
+
+            triggerLayer.addEventListener('click', function (e) {
+                if (!e.target || e.target !== this) {
+                    // console.info(e.type, 'SKIP', this, e.target);
+                    return true;
+                } else {
+                    e.preventDefault();
+                    var x = e.offsetX || e.pageX;
+                    var left = x < (triggerLayerWidth / 2);
+                    // console.info('[SCREENING] CLICK!', {
+                    //     x: x,
+                    //     left: x < (triggerLayerWidth / 2),
+                    //     right: x > (triggerLayerWidth / 2),
+                    // });
+                    if (active) open(left ? urlLeft : urlRight);
+                    //w.location.href = url; // same window
+                    return false;
+                };
+            }, false);
+        }
+
+        w.DPSC = function (imgUrl, urlLeft, urlRight) {
+            console.log('[SCREENING] call', d.readyState);
+            if (~d.readyState.indexOf('v') || ~d.readyState.indexOf('c')) {
+                // console.info('[SCREENING] DOM Ready');
+                return init(imgUrl, urlLeft, urlRight);
+            } else {
+                // console.info('[SCREENING] Waiting for DOM...');
+                d.addEventListener('readystatechange', function () {
+                    if (~d.readyState.indexOf('v')) return init(imgUrl, urlLeft, urlRight);
+                }, false);
+            }
+        };
+
+        var open = function (url) {
+            w.open(url, '_blank');
+            w.focus();
+        };
+
+        var listener = function (e) {
+            if (e.origin.includes('forum.dobreprogramy.pl') && e.data.imgUrl && e.data.urlLeft && e.data.urlRight) {
+                // console.log('[SCREENING] received data from iframe: ', e.data);
+                // w.removeEventListener('message', listener, false);
+                return w.DPSC(e.data.imgUrl, e.data.urlLeft, e.data.urlRight);
+            }
+            return;
+        };
+        
+        w.addEventListener('message', listener, false);
+        
+        w.refreshSC = function (url, title) {
+            if (typeof previousState != 'undefined') d.body.style.background = previousState;
+        }
+
+        // DEBUG
+        // w.DPSC('//via.placeholder.com/1920x1080', 'https://www.google.pl');
+
+    })(
+        window,
+        document,
+        '#1d252f' // intel brand color
+    );
+// ]]>

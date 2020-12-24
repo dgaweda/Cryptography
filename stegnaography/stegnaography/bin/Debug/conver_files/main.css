@@ -1,0 +1,89 @@
+body {
+  background-color: #DCDCDC;
+  font-family: verdana, helvetica, sans-serif;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+h1 {
+font-size: 20px;
+font-weight: bold;
+}
+h2 {
+font-size: 18px;
+font-weight: bold;
+}
+h3 {
+font-size: 16px;
+font-weight: bold;
+}
+h4 {
+font-size: 14px;
+font-weight: bold;
+}
+pre {
+font-size: 14px;
+}
+a,em {
+  color: #005ce5;
+}
+div.main {
+  background-color: #EEEEEE;
+  padding: 2% 3% 2% 3%; /*top right bottom left*/
+  border: 2px solid #6699FF;
+}
+div.reverse {
+  background-color: #6699FF;
+  color: white;
+  font-weight: bold;
+  padding: 2% 3% 2% 3%; /*top right bottom left*/
+  padding-top: 4px;
+  padding-bottom: 5px;
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+div.reverse a {
+  color: white;
+  font-weight: bold;
+  font-decoration: none;
+}
+h1.heading{
+  font-size: 16px;
+  background-color: #6699FF;
+  color: white;
+  padding: 2% 3% 2% 3%; /*top right bottom left*/
+  padding-top: 4px;
+  padding-bottom: 5px;
+  margin-top: -1em; /* NN4 */
+  margin-bottom: 3px; /* NN4 */
+}
+div.hrule-top {
+  border-top: 4px solid #6699FF;
+  padding: 2% 3% 2% 3%; /*top right bottom left*/
+  margin-bottom: 2px;
+}
+div.hrule-bottom {
+  border-bottom: 4px solid #6699FF;
+  padding: 2% 3% 2% 3%; /*top right bottom left*/
+  margin-top: 2px;
+}
+div.tt {
+  font-family: courier new, monospace;
+}
+/*
+a:link {
+color: #00CD00;
+text-decoration: underline;
+} 
+a:visited {
+color: #008B00;
+text-decoration: underline;
+} 
+a:hover {
+color: rgb(0, 96, 255);
+padding-bottom: 5px;
+text-decoration: underline;
+} 
+a:active {
+color: #00CD00;
+}
+*/ 
