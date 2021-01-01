@@ -12,46 +12,49 @@ namespace stegnaography
         public void AddDoubleSpace()
         {
             File.WriteAllText("watermark.html", null);
-            
+            string One = "  ";
+            string Zero = " ";
+            string pattern = " ";
             string msgBin = Msg();
             string[] Lines = File.ReadAllLines("cover.html");
             int i = 0;
 
             foreach (var line in Lines)
             {
-                if (i < msgBin.Length && line.Contains(" "))
+                if (System.Text.RegularExpressions.Regex.IsMatch(line, pattern))
                 {
-                    foreach (var ch in line)
+                    if (i < msgBin.Length && msgBin[i].Equals('0'))
                     {
-                        if (i < msgBin.Length && Char.IsWhiteSpace(ch) && msgBin[i].Equals('1'))
+                        File.AppendAllText("watermark.html", line.Replace(pattern, Zero) + "\n");
+                        i++;
+                    }
+                    else
+                    {
+                        if (i < msgBin.Length && msgBin[i].Equals('1'))
                         {
-                            File.AppendAllText("watermark.html", "  ");
+                            File.AppendAllText("watermark.html", line.Replace(pattern, One) + "\n");
                             i++;
                         }
-                        else
-                        {
-                            if (i < msgBin.Length && Char.IsWhiteSpace(ch) && msgBin[i].Equals('0'))
-                            {
-                                File.AppendAllText("watermark.html", ch.ToString());
-                                i++;
-                            }
-                            else
-                                File.AppendAllText("watermark.html", ch.ToString(), Encoding.GetEncoding("Windows-1250"));
-                        }
-
-                        
                     }
                 }
                 else
                     File.AppendAllText("watermark.html", line + "\n");
             }
+            if (i < msgBin.Length)
+            {
+                Console.WriteLine("Nosnik jest za maly.\nNacisnij przycisk aby kontynowac.");
+                Console.ReadKey();
+            }
+            else
+                Console.WriteLine("Zanurzanie skonczone");
         }
 
         public override void GetMsg()
         {
-            string BlankSpace = "  ";
             string Letter = null;
             string Hex = null;
+            string One = "  ";
+            string Zero = " ";
             File.WriteAllText("detect.txt", null);
 
             string[] Lines = File.ReadAllLines("watermark.html");
@@ -59,28 +62,19 @@ namespace stegnaography
 
             foreach (var line in Lines)
             {
-                if (line.Contains(BlankSpace))
+                if (System.Text.RegularExpressions.Regex.IsMatch(line, One))
                 {
-                    for (var i = 0; i < line.Length; i++)
+                    binValues.Add(1);
+                }
+                else
+                {
+                    if (System.Text.RegularExpressions.Regex.IsMatch(line, Zero))
                     {
-                        if (Char.IsWhiteSpace(line[i]))
-                        {
-                            int j = i;
-                            j++;
-                            if (j < line.Length && Char.IsWhiteSpace(line[j]))
-                            {
-                                binValues.Add(1);
-                                i++;
-                            }
-                            else
-                            {
-                                binValues.Add(0);
-                                i++;
-                            }
-                        }
+                        binValues.Add(0);
                     }
                 }
             }
+
             // Conversion from bin to dec
             foreach (var val in binValues)
             {

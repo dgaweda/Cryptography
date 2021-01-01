@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.IO;
 
 namespace stegnaography
 {
-    class Third : Message
+    class Fourth : Message
     {
-        public void AddingFalseAttributeToLi()
+        public void ChangingClosingOfLi()
         {
             File.WriteAllText("watermark.html", null);
-            
-            string One = "<li style=list-style-type:loer-alpha>"; // 1
-            string Zero = "<li style=list-style-type:lower-alpa>"; // 0
             string msgBin = Msg();
             string[] Lines = File.ReadAllLines("cover.html");
-            int i = 0;
-            
             string pattern = "<li>";
+            string One = "<li></li><li>"; // <li></li><li> -- 0
+            string Zero = "</li><li></li>"; // </li><li></li> -- 1
+            int i = 0;
 
-            foreach (string line in Lines)
+            foreach (var line in Lines)
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(line, pattern))
                 {
@@ -47,11 +48,10 @@ namespace stegnaography
             else
                 Console.WriteLine("Zanurzanie skonczone");
         }
-
         public override void GetMsg()
         {
-            string One = "<li style=list-style-type:loer-alpha>"; // 0
-            string Zero = "<li style=list-style-type:lower-alpa>"; // 1
+            string One = "<li></li><li>"; // 1
+            string Zero = "</li><li></li>"; // 0
             string Letter = null;
             string Hex = null;
 
@@ -64,6 +64,7 @@ namespace stegnaography
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(line, One))
                     binValues.Add(1);
+                
                 if (System.Text.RegularExpressions.Regex.IsMatch(line, Zero))
                     binValues.Add(0);
             }
