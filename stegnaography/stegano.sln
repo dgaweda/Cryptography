@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stegnaography", "stegnaography\stegnaography.csproj", "{B60134DB-5004-4543-9EF5-17921D78CE4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cezar", "..\cezar\cezar.csproj", "{B80BFF5C-B1FE-4670-81DA-B58A57BEE37B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaesarCipher", "D:\Pobrane\CaesarCipher\CaesarCipher\CaesarCipher.csproj", "{EA063CC6-B9B2-4FF0-84C5-3FFEBFD18FEA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{B60134DB-5004-4543-9EF5-17921D78CE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B60134DB-5004-4543-9EF5-17921D78CE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B60134DB-5004-4543-9EF5-17921D78CE4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B80BFF5C-B1FE-4670-81DA-B58A57BEE37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B80BFF5C-B1FE-4670-81DA-B58A57BEE37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B80BFF5C-B1FE-4670-81DA-B58A57BEE37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B80BFF5C-B1FE-4670-81DA-B58A57BEE37B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA063CC6-B9B2-4FF0-84C5-3FFEBFD18FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA063CC6-B9B2-4FF0-84C5-3FFEBFD18FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA063CC6-B9B2-4FF0-84C5-3FFEBFD18FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA063CC6-B9B2-4FF0-84C5-3FFEBFD18FEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
