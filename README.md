@@ -5,5 +5,5 @@ Projects from Cryptography
 3. Xor cipher
 4. Steganography
 
-#Dariusz Gawęda 
-#University of Gdansk
+# Dariusz Gawęda 
+# University of Gdansk
